@@ -24,7 +24,6 @@ on:
           default: '-1002287610863'
           required: false
 
-
 env:
   TZ: Asia/Jakarta
   DEVICE: ${{ github.event.inputs.device }}
