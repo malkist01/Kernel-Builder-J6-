@@ -26,7 +26,7 @@ LOADS=$(nproc)
 START=$(date +"%s")
 KCF=-mno-android
 DEF=teletubies_defconfig
-export ARCH=arm64
+export ARCH=arm6
 export KBUILD_BUILD_USER=malkist
 export KBUILD_BUILD_HOST=android
 # sticker plox
