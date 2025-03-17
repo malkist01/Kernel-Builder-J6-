@@ -21,7 +21,6 @@ SHA=$(echo $DRONE_COMMIT_SHA | cut -c 1-8)
 IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
 TANGGAL=$(date +'%H%M-%d%m%y')
 START=$(date +"%s")
-export CROSS_COMPILE="$(pwd)/gcc-64/bin/aarch64-linux-gnu-"
 export PATH="$(pwd)/gcc-64/bin:$PATH"
 export ARCH=arm64
 export KBUILD_BUILD_USER=malkist
@@ -74,7 +73,7 @@ function finerr() {
 }
 # Compile plox
 function compile() {
-         CC=g++ \
+          CC=g++ \
 					  LD=ld \
 					  AR=ar \
 					  AS=as \
