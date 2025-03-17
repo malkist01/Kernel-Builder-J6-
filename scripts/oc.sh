@@ -6,8 +6,7 @@ echo "Nuke previous toolchains"
 rm -rf toolchain out AnyKernel
 echo "cleaned up"
 echo "Cloning dependencies"
-git clone --depth=1 -b cm-12.0 https://github.com/malkist01/arm-linux-androideabi-4.9.git gcc32
-git clone --depth=1 -b master https://github.com/malkist01/aarch64-linaro-linux-gnu-4.9.git gcc
+git clone --depth=1 https://github.com/rokibhasansagar/linaro-toolchain-latest.git -b latest-4 gcc-64
 echo "Done"
 if [ "$is_test" = true ]; then
      echo "Its alpha test build"
@@ -18,16 +17,12 @@ if [ "$is_test" = true ]; then
 else
      echo "Its beta release build"
 fi
-GCC="$(pwd)/gcc/bin/aarch64-linux-gnu-"
-GCC32="$(pwd)/gcc32/bin/arm-linux-androideabi-"
 SHA=$(echo $DRONE_COMMIT_SHA | cut -c 1-8)
 IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
 TANGGAL=$(date +'%H%M-%d%m%y')
-JOBS=$(nproc)
-LOADS=$(nproc)
 START=$(date +"%s")
-KCF=-mno-android
-DEF=teletubies_defconfig
+export CROSS_COMPILE="$(pwd)/gcc-64/bin/aarch64-linux-gnu-"
+export PATH="$(pwd)/gcc-64/bin:$PATH"
 export ARCH=arm64
 export KBUILD_BUILD_USER=malkist
 export KBUILD_BUILD_HOST=android
@@ -79,8 +74,17 @@ function finerr() {
 }
 # Compile plox
 function compile() {
-    make -s -C $(pwd) -j$JOBS O=out "${DEF}"
-    make -C $(pwd) CROSS_COMPILE="${GCC}" CROSS_COMPILE_COMPAT="${GCC32}" KCFLAGS="${KCF}" O=out -j$JOBS -l$LOADS 2>&1| tee build.log
+         CC=g++ \
+                                          LD=ld \
+                                          AR=ar \
+                                          AS=as \
+                                          NM=nm \
+                                          OBJCOPY=objcopy \
+                                          OBJDUMP=objdump \
+                                          STRIP=strip \
+     make -C $(pwd) O=out teletubies_defconfig
+     make -j8 -C $(pwd) O=out
+
      if ! [ -a "$IMAGE" ]; then
         finderr
         exit 1
@@ -92,7 +96,7 @@ function compile() {
 # Zipping
 zipping() {
     cd AnyKernel || exit 1
-    zip -r9 Teletubies-OC"${CODENAME}"-"${DATE}".zip ./*
+    zip -r9 Teletubies-Eas"${CODENAME}"-"${DATE}".zip ./*
     cd ..
 }
 compile
