@@ -1,4 +1,4 @@
-name: arm
+name: caf
 
 on:
   workflow_dispatch:
