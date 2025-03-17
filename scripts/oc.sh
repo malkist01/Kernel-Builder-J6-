@@ -7,7 +7,7 @@ rm -rf toolchain out AnyKernel
 echo "cleaned up"
 echo "Cloning dependencies"
 git clone --depth=1 -b cm-12.1 https://github.com/malkist01/arm-linux-androideabi-4.9.git gcc32
-git clone --depth=1 -b gcc https://github.com/malkist01/arm64.git gcc
+git clone --depth=1 -b dev https://github.com/malkist01/linaro-64.git gcc
 echo "Done"
 if [ "$is_test" = true ]; then
      echo "Its alpha test build"
@@ -19,7 +19,7 @@ else
      echo "Its beta release build"
 fi
 GCC="$(pwd)/gcc/bin/aarch64-linux-android-"
-GCC32="$(pwd)/gcc32/bin/arm-linux-gnueabi-"
+GCC32="$(pwd)/gcc32/bin/arm-linux-androideabi-"
 SHA=$(echo $DRONE_COMMIT_SHA | cut -c 1-8)
 IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
 TANGGAL=$(date +'%H%M-%d%m%y')
