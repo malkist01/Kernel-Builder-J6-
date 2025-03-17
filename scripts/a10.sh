@@ -46,8 +46,8 @@ function compile() {
                                           OBJCOPY=objcopy \
                                           OBJDUMP=objdump \
                                           STRIP=strip \
-     make -C $(pwd) O=out j6primelte_defconfig
-     make -j8 -C $(pwd) O=out
+     make O=out ARCH=arm KCFLAGS=-mno-android j6primelte_defconfig
+     make O=out ARCH=arm KCFLAGS=-mno-android -j$(nproc --all)
 
      if ! [ -a "$IMAGE" ]; then
         finderr
