@@ -9,11 +9,11 @@ on:
           required: true
       repo:
           description: 'Kernel source link (dont include . git at the end)'
-          default: 'https://github.com/malkist01/caf_kernel64.git'
+          default: 'https://github.com/malkist01/J6P.git'
           required: true
       branch:
           description: 'Kernel source branch'
-          default: 'nonlto'
+          default: '3.18'
           required: true
       token:
           description: 'Telegram bot token'
