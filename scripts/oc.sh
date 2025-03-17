@@ -6,7 +6,7 @@ echo "Nuke previous toolchains"
 rm -rf toolchain out AnyKernel
 echo "cleaned up"
 echo "Cloning dependencies"
-git clone --depth=1 -b gcc https://github.com/malkist01/arm.git gcc32
+git clone --depth=1 -b cm-12.1 https://github.com/malkist01/arm-linux-androideabi-4.9.git gcc32
 git clone --depth=1 -b gcc https://github.com/malkist01/arm64.git gcc
 echo "Done"
 if [ "$is_test" = true ]; then
