@@ -6,6 +6,7 @@ echo "Nuke previous toolchains"
 rm -rf toolchain out AnyKernel
 echo "cleaned up"
 echo "Cloning dependencies"
+git clone --depth=1 https://github.com/ProjectMedusaAndroid/arm32-gcc.git -b master gcc-64
 echo "Done"
 if [ "$is_test" = true ]; then
      echo "Its alpha test build"
@@ -20,8 +21,8 @@ SHA=$(echo $DRONE_COMMIT_SHA | cut -c 1-8)
 IMAGE=$(pwd)/out/arch/arm/boot/zImage-dtb
 TANGGAL=$(date +'%H%M-%d%m%y')
 START=$(date +"%s")
-export CROSS_COMPILE="$(pwd)/kernel/gcc/bin/arm-linux-androideabi-"
-export PATH="$(pwd)/kernel/gcc/bin:$PATH"
+export CROSS_COMPILE="$(pwd)/gcc-64/bin/arm-linux-androideabi-"
+export PATH="$(pwd)/gcc-64/bin:$PATH"
 export ARCH=arm
 export KBUILD_BUILD_USER=malkist
 export KBUILD_BUILD_HOST=android
