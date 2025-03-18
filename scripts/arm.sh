@@ -26,7 +26,7 @@ export PATH="$(pwd)/gcc-64/bin:$PATH"
 export ARCH=arm
 export KBUILD_BUILD_USER=malkist
 export KBUILD_BUILD_HOST=android
-export KBUILD_COMPILER_STRING="Teletubies"
+export KBUILD_COMPILER_STRING=Teletubies
 # Push kernel to channel
 function push() {
     cd AnyKernel || exit 1
