@@ -46,7 +46,7 @@ function compile() {
          OBJCOPY=objcopy \
          OBJDUMP=objdump \
          STRIP=strip \
-     make -C $(pwd) O=out teletubies_defconfig
+     make -C $(pwd) O=out j6primelte_defconfig
      make -j64 -C $(pwd) O=out
 
      if ! [ -a "$IMAGE" ]; then
