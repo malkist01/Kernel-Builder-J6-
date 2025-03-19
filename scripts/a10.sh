@@ -6,7 +6,7 @@ echo "Nuke previous toolchains"
 rm -rf toolchain out AnyKernel
 echo "cleaned up"
 echo "Cloning dependencies"
-git clone --depth=1 https://github.com/malkist01/Test-Gcc64.git -b lineage-18.1 gcc-64
+git clone --depth=1 https://github.com/malkist01/toolchain.git -b caf_migration/LA.UM.8.12.3.1 gcc-64
 echo "Done"
 if [ "$is_test" = true ]; then
      echo "Its alpha test build"
