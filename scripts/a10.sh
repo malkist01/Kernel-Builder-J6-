@@ -6,7 +6,7 @@ echo "Nuke previous toolchains"
 rm -rf toolchain out AnyKernel
 echo "cleaned up"
 echo "Cloning dependencies"
-git clone --depth=1 https://github.com/malkist01/malkist-gcc64.git -b master gcc-64
+git clone --depth=1 https://github.com/malkist01/gcc-4.9-brillio.git -b master gcc-64
 echo "Done"
 if [ "$is_test" = true ]; then
      echo "Its alpha test build"
