@@ -6,7 +6,7 @@ echo "Nuke previous toolchains"
 rm -rf toolchain out AnyKernel
 echo "cleaned up"
 echo "Cloning dependencies"
-git clone --depth=1 https://github.com/malkist01/arm64.git -b gcc gcc-64
+git clone --depth=1 https://github.com/malkist01/SM-aarch64-linux-android-4.9.git -b master gcc-64
 echo "Done"
 if [ "$is_test" = true ]; then
      echo "Its alpha test build"
@@ -52,7 +52,7 @@ function compile() {
 # Zipping
 zipping() {
     cd AnyKernel || exit 1
-    zip -r9 Teletubies-J6+"${CODENAME}" A10-Arm64"${DATE}".zip ./*
+    zip -r9 Teletubies-J6+"${CODENAME}" Tes-Arm64"${DATE}".zip ./*
     cd ..
 }
 compile
