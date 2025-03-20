@@ -13,7 +13,7 @@ on:
           required: true
       branch:
           description: 'Kernel source branch'
-          default: 'EAS'
+          default: 'LA.UM.8.6.r1-devel-new'
           required: true
       token:
           description: 'Telegram bot token'
