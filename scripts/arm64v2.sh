@@ -6,8 +6,7 @@ echo "Nuke previous toolchains"
 rm -rf toolchain out AnyKernel
 echo "cleaned up"
 echo "Cloning dependencies"
-git clone --depth=1 https://github.com/malkist01/malkist-toolchain.git -b master gcc
-git clone --depth=1 https://github.com/malkist01/proton-clang.git -b proton-clang-11 gcc-64
+git clone --depth=1 https://github.com/malkist01/malkist-toolchain.git -b master gcc-64
 echo "Done"
 if [ "$is_test" = true ]; then
      echo "Its alpha test build"
@@ -41,7 +40,7 @@ function compile() {
     export PATH="$(pwd)/gcc-64/bin:$PATH"
     make -j$(nproc --all) O=out ARCH=arm64 j6primelte_defconfig
     make -j$(nproc --all) ARCH=arm64 O=out \
-                          CC=clang \
+                          CC=gcc \
                           CROSS_COMPILE=aarch64-linux-gnu- \
                           CROSS_COMPILE_ARM32=arm-linux-gnueabi-
 
