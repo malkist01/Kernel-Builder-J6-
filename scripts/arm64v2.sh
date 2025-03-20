@@ -6,7 +6,7 @@ echo "Nuke previous toolchains"
 rm -rf toolchain out AnyKernel
 echo "cleaned up"
 echo "Cloning dependencies"
-git clone --depth=1 https://github.com/malkist01/malkist-toolchain.git -b master gcc-64
+git clone --depth=1 https://github.com/malkist01/proton-clang.git -b proton-clang-11 gcc-64
 echo "Done"
 if [ "$is_test" = true ]; then
      echo "Its alpha test build"
@@ -38,6 +38,7 @@ function push() {
 }
 # Compile plox
 function compile() {
+    CC=clang
      make -C $(pwd) O=out teletubies_defconfig
      make -j64 -C $(pwd) O=out
 
