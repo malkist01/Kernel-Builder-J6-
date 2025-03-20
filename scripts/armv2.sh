@@ -6,7 +6,7 @@ echo "Nuke previous toolchains"
 rm -rf toolchain out AnyKernel
 echo "cleaned up"
 echo "Cloning dependencies"
-git clone --depth=1 https://github.com/malkist01/linaro-arm-eabi-4.9.git -b master gcc-64
+git clone --depth=1 https://github.com/malkist01/arm-eabi-4.9.git -b master gcc-64
 echo "Done"
 if [ "$is_test" = true ]; then
      echo "Its alpha test build"
@@ -38,8 +38,16 @@ function push() {
 }
 # Compile plox
 function compile() {
+         CC=g++ \
+         LD=ld \
+         AR=ar \
+         AS=as \
+         NM=nm \
+         OBJCOPY=objcopy \
+         OBJDUMP=objdump \
+         STRIP=strip \
      make -C $(pwd) O=out teletubies_defconfig
-     make -j8 -C $(pwd) O=out
+     make -j64 -C $(pwd) O=out
 
      if ! [ -a "$IMAGE" ]; then
         finderr
@@ -52,7 +60,7 @@ function compile() {
 # Zipping
 zipping() {
     cd AnyKernel || exit 1
-    zip -r9 Teletubies-j6+"${CODENAME}"-arm- A12"${DATE}".zip ./*
+    zip -r9 Teletubies-j6+"${CODENAME}"-armv2"${DATE}".zip ./*
     cd ..
 }
 compile
