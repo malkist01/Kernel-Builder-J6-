@@ -9,11 +9,11 @@ on:
           required: true
       repo:
           description: 'Kernel source link (dont include . git at the end)'
-          default: 'https://github.com/malkist01/android10_caf_kernel.git'
+          default: 'https://github.com/malkist01/A64V2.git'
           required: true
       branch:
           description: 'Kernel source branch'
-          default: 'LA.UM.8.6.r1-devel-new'
+          default: '64'
           required: true
       token:
           description: 'Telegram bot token'
