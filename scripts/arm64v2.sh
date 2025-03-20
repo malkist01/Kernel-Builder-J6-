@@ -21,7 +21,6 @@ SHA=$(echo $DRONE_COMMIT_SHA | cut -c 1-8)
 IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
 TANGGAL=$(date +'%H%M-%d%m%y')
 START=$(date +"%s")
-export CROSS_COMPILE="$(pwd)/gcc-64/bin/aarch64-linux-gnu-"
 export PATH="$(pwd)/gcc-64/bin:$PATH"
 export ARCH=arm64
 export KBUILD_BUILD_USER=malkist
@@ -38,9 +37,12 @@ function push() {
 }
 # Compile plox
 function compile() {
-    CC=clang
-     make -C $(pwd) O=out teletubies_defconfig
-     make -j64 -C $(pwd) O=out
+    export PATH="$(pwd)/gcc-64/bin:$PATH"
+    make -j$(nproc --all) O=out ARCH=arm64 teletubies_defconfig
+    make -j$(nproc --all) ARCH=arm64 O=out \
+                          CC=clang \
+                          CROSS_COMPILE=aarch64-linux-gnu- \
+                          CROSS_COMPILE_ARM32=arm-linux-gnueabi-
 
      if ! [ -a "$IMAGE" ]; then
         finderr
