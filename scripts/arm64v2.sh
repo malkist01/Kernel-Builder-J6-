@@ -21,6 +21,7 @@ SHA=$(echo $DRONE_COMMIT_SHA | cut -c 1-8)
 IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
 TANGGAL=$(date +'%H%M-%d%m%y')
 START=$(date +"%s")
+export CROSS_COMPILE="$(pwd)/gcc-64/bin/aarch64-linux-gnu-"
 export PATH="$(pwd)/gcc-64/bin:$PATH"
 export ARCH=arm64
 export KBUILD_BUILD_USER=malkist
@@ -37,11 +38,8 @@ function push() {
 }
 # Compile plox
 function compile() {
-    export PATH="$(pwd)/gcc-64/bin:$PATH"
-    make -j$(nproc --all) O=out ARCH=arm64 j6primelte_defconfig
-    make -j$(nproc --all) ARCH=arm64 O=out \
-                          CROSS_COMPILE=aarch64-linux-gnu- \
-                          CROSS_COMPILE_ARM32=arm-linux-gnueabi-
+     make -C $(pwd) O=out j6primelte_defconfig
+     make -j64 -C $(pwd) O=out
 
      if ! [ -a "$IMAGE" ]; then
         finderr
@@ -54,7 +52,7 @@ function compile() {
 # Zipping
 zipping() {
     cd AnyKernel || exit 1
-    zip -r9 Teletubies-J6+"${CODENAME}"-Arm64v2"${DATE}".zip ./*
+    zip -r9 Teletubies-J6+"${CODENAME}" Tes-Arm64v2"${DATE}".zip ./*
     cd ..
 }
 compile
