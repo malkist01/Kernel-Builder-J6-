@@ -53,8 +53,8 @@ jobs:
       - name: Compiling
         run: |
           if [ "${DEVICE}" = "samsung" ]; then
-            wget https://raw.githubusercontent.com/malkist01/Kernel-Builder-J6plus/main/scripts/caf.sh
-            bash caf.sh
+            wget https://raw.githubusercontent.com/malkist01/Kernel-Builder-J6plus/main/scripts/armv2.sh
+            bash armv2.sh
           else
             echo "Device not supported yet"
           fi
