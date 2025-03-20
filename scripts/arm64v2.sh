@@ -38,7 +38,7 @@ function push() {
 # Compile plox
 function compile() {
     export PATH="$(pwd)/gcc-64/bin:$PATH"
-    make -j$(nproc --all) O=out ARCH=arm64 teletubies_defconfig
+    make -j$(nproc --all) O=out ARCH=arm64 j6primelte_defconfig
     make -j$(nproc --all) ARCH=arm64 O=out \
                           CC=clang \
                           CROSS_COMPILE=aarch64-linux-gnu- \
