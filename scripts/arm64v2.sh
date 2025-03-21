@@ -24,6 +24,7 @@ START=$(date +"%s")
 export CROSS_COMPILE="$(pwd)/gcc-64/bin/aarch64-linux-gnu-"
 export PATH="$(pwd)/gcc-64/bin:$PATH"
 export ARCH=arm64
+export KBUILD_LOCAL_VERSION=Teletubies
 export KBUILD_BUILD_USER=malkist
 export KBUILD_BUILD_HOST=android
 # Push kernel to channel
