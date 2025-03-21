@@ -6,7 +6,7 @@ echo "Nuke previous toolchains"
 rm -rf toolchain out AnyKernel
 echo "cleaned up"
 echo "Cloning dependencies"
-git clone --depth=1 https://github.com/zexceed12300/clang-9 -b master gcc-64
+git clone --depth=1 https://github.com/KeanuSilverhand/aarch64-linux-android-4.9 -b master gcc-64
 echo "Done"
 if [ "$is_test" = true ]; then
      echo "Its alpha test build"
@@ -21,9 +21,7 @@ SHA=$(echo $DRONE_COMMIT_SHA | cut -c 1-8)
 IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
 TANGGAL=$(date +'%H%M-%d%m%y')
 START=$(date +"%s")
-export CLANG_COMPILE="$(pwd)/gcc-64/bin/aarch64-linux-android-"
-export CROSS_COMPILE="$(pwd)/gcc-64/aarch64-linux-android-4.9/bin/aarch64-linux-android-"
-export CROSS_COMPILE_ARM32="$(pwd)/gcc-64/aarch64-linux-android-4.9/bin/arm-linux-androideabi-"
+export CROSS_COMPILE="$(pwd)/gcc-64/bin/aarch64-linux-android-"
 export PATH="$(pwd)/gcc-64/bin:$PATH"
 export ARCH=arm64
 export KBUILD_LOCAL_VERSION=Teletubies
@@ -41,7 +39,6 @@ function push() {
 }
 # Compile plox
 function compile() {
-     CC=clang
      make -C $(pwd) O=out j6primelte_defconfig
      make -j64 -C $(pwd) O=out
 
